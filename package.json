@@ -9,7 +9,10 @@
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "extension:firefox": "node scripts/package-extension.mjs firefox",
+    "extension:chromium": "node scripts/package-extension.mjs chromium",
+    "extension:all": "pnpm extension:firefox && pnpm extension:chromium"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

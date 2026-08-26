@@ -1,0 +1,87 @@
+/* Style: Lime Signal is reserved for operational status; the active wallet uses a repeatable instrument edge. */
+.custom-wordmark {
+  position: relative;
+  display: block;
+}
+
+.custom-wordmark i {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+}
+
+.custom-wordmark i::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: 1px;
+  width: 6px;
+  height: 2px;
+  background: var(--lime);
+  transform: skewX(-28deg);
+}
+
+.deck-rail {
+  position: absolute;
+  top: 26px;
+  right: 0;
+  width: 218px;
+  display: grid;
+  gap: 13px;
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+}
+
+.deck-rail > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--line);
+}
+
+.deck-rail span {
+  color: #70746a;
+  font: 9px 'IBM Plex Mono';
+  letter-spacing: .7px;
+}
+
+.deck-rail strong {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #d6d8cf;
+  font: 10px 'IBM Plex Mono';
+  letter-spacing: .4px;
+}
+
+.deck-rail strong svg,
+.deck-rail > div:first-child strong {
+  color: var(--lime);
+}
+
+.wallet-row.is-pinned {
+  position: relative;
+  background: linear-gradient(90deg, rgba(215,255,79,.075), transparent 35%);
+}
+
+.wallet-row.is-pinned::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 0;
+  width: 3px;
+  background: var(--lime);
+  box-shadow: 0 0 13px rgba(215,255,79,.28);
+}
+
+.wallet-row.is-pinned .pin {
+  color: var(--lime);
+}
+
+@media (max-width: 820px) {
+  .deck-rail { display: none; }
+}
+

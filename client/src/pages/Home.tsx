@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Check, CheckCircle2, Circle, Copy, GripVertical, Moon, PencilLine, Plus, Search, Settings2, ShieldCheck, Square, Sun, Trash2, WalletCards } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "wouter";
 
 type Wallet = { id: number; name: string; network: "Ethereum" | "Solana"; address: string; full: string; color: string; uses: number; pinned: boolean };
 type QuickCopySettings = { color: string; label: boolean; shape: "circle" | "rounded"; size: "medium" | "large" };
@@ -89,7 +90,7 @@ export default function Home() {
 
   return <div className={`app-shell ${theme === "light" ? "light-mode" : ""}`}>
     <aside className="sidebar">
-      <div className="brand"><div className="brand-mark brand-logo"><QuickCopyLogo /></div><div><strong>quick<span>copy</span></strong><small>WALLET CONTROL</small></div></div>
+      <div className="brand"><div className="brand-mark brand-logo"><QuickCopyLogo /></div><div><strong className="custom-wordmark"><i>q</i>uick<span>copy</span></strong><small>WALLET CONTROL</small></div></div>
       <div className="side-label">Workspace</div>
       <nav>
         <button className="nav-item active"><WalletCards size={17} /> Wallets <b>{wallets.length}</b></button>
@@ -99,12 +100,12 @@ export default function Home() {
       <div className="side-bottom"><div className="security-note"><ShieldCheck size={18} /><div><strong>Local first</strong><span>Your addresses never leave this device.</span></div></div><a className="sidebar-byline" href="https://x.com/amiraphist" target="_blank" rel="noreferrer">A project by @amiraphist ↗</a><div className="version">BUILD 0.1.0 <span>●</span> READY</div></div>
     </aside>
     <main className="main-content">
-      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><i>/</i><strong>Wallets</strong></div></header>
-      <section className="hero"><div><div className="eyebrow"><span className="pulse-dot" /> PERSONAL CONTROL DECK</div><h1>Copy once.<br /><em>Move faster.</em></h1><p>Your public addresses, one click away from the next whitelist.</p></div></section>
+      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><i>/</i><strong>Wallets</strong></div><Link href="/" className="product-link">Product site <span>↗</span></Link></header>
+      <section className="hero"><div><div className="eyebrow"><span className="pulse-dot" /> PERSONAL CONTROL DECK</div><h1>Copy once.<br /><em>Move faster.</em></h1><p>Your public addresses, one click away from the next whitelist.</p></div><aside className="deck-rail" aria-label="Dashboard status"><div><span>LOCAL STORAGE</span><strong><ShieldCheck size={14} /> READY</strong></div><div><span>WALLET SLOTS</span><strong>{wallets.length} / 5</strong></div><div><span>FINAL ACTION</span><strong>MANUAL POST</strong></div></aside></section>
       <section className="workspace-head"><div><div className="section-kicker">YOUR TOOLKIT <span>·</span> {wallets.length}/5 ADDRESSES</div><h2>Wallet library</h2></div><button className="add-btn" onClick={openCreate} disabled={wallets.length >= 5}><Plus size={18} /> {wallets.length >= 5 ? "Limit reached" : "Add wallet"}</button></section>
       <div className="toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search wallets or networks" /></div></div>
       <div className="wallet-list">
-        {filtered.map((wallet) => <article key={wallet.id} onDragOver={(event) => { event.preventDefault(); if (draggedId !== wallet.id) setDragOverId(wallet.id); }} onDrop={(event) => { event.preventDefault(); if (draggedId !== null) moveWallet(draggedId, wallet.id); setDraggedId(null); setDragOverId(null); }} className={`wallet-row ${dragOverId === wallet.id ? "drag-over" : ""}`}>
+        {filtered.map((wallet) => <article key={wallet.id} onDragOver={(event) => { event.preventDefault(); if (draggedId !== wallet.id) setDragOverId(wallet.id); }} onDrop={(event) => { event.preventDefault(); if (draggedId !== null) moveWallet(draggedId, wallet.id); setDraggedId(null); setDragOverId(null); }} className={`wallet-row ${wallet.pinned ? "is-pinned" : ""} ${dragOverId === wallet.id ? "drag-over" : ""}`}>
           <button type="button" draggable onDragStart={(event) => { event.dataTransfer.effectAllowed = "move"; setDraggedId(wallet.id); }} onDragEnd={() => { setDraggedId(null); setDragOverId(null); }} className="drag-handle" aria-label={`Reorder ${wallet.name}`} title="Drag to reorder"><GripVertical size={16} /></button>
           <div className={`network-icon ${wallet.color}`}><NetworkMark network={wallet.network} /></div>
           <div className="wallet-row-main"><div className="wallet-row-title"><strong>{wallet.name}</strong>{wallet.pinned && <span className="pin">PINNED</span>}</div><span>{wallet.network}</span></div>
@@ -118,7 +119,7 @@ export default function Home() {
       <section id="settings" className="settings-section compact-settings"><div className="settings-intro"><div><div className="section-kicker">CONTROL PANEL <span>·</span> EXTENSION UI</div><h2>Button style</h2><p>Keep the action clear and consistent in every X theme.</p></div><div className="settings-saved"><Check size={14} /> Saved locally</div></div><div className="settings-layout settings-layout-single"><div className="settings-controls">
         <div className="setting-group"><label>BUTTON SHAPE <span>Pick the silhouette used on X</span></label><div className="shape-row">{([{ id: "circle", label: "Circle" }, { id: "rounded", label: "Rounded" }] as const).map((shape) => <button key={shape.id} aria-label={shape.label} className={`shape-choice shape-${shape.id} ${settings.shape === shape.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, shape: shape.id }))}><ShapeIcon shape={shape.id} /></button>)}</div></div>
         <div className="setting-group"><label>BUTTON SIZE <span>Choose the footprint used on X</span></label><div className="size-row">{([{ id: "medium", label: "Medium" }, { id: "large", label: "Large" }] as const).map((size) => <button key={size.id} aria-label={size.label} className={`size-choice ${settings.size === size.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, size: size.id }))}><SizeIcon size={size.id} /></button>)}</div></div>
-        <div className="setting-group"><label>ACCENT COLOR <span>Signal color for the floating action</span></label><div className="color-row color-row-single">{[{ id: "lime", hex: "#D7FF4F", name: "Lime Signal" }, { id: "sky", hex: "#85D8FF", name: "Sky Relay" }, { id: "coral", hex: "#FF9C72", name: "Coral Pulse" }, { id: "violet", hex: "#C2A5FF", name: "Soft Violet" }].map((color) => <button key={color.id} className={`color-choice ${settings.color === color.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, color: color.id }))}><span style={{ background: color.hex }} />{color.name}</button>)}</div></div>
+        <div className="setting-group"><label>ACCENT COLOR <span>Applies to the X trigger only</span></label><div className="color-row color-row-single">{[{ id: "lime", hex: "#D7FF4F", name: "Lime Signal" }, { id: "sky", hex: "#85D8FF", name: "Sky Relay" }, { id: "coral", hex: "#FF9C72", name: "Coral Pulse" }, { id: "violet", hex: "#C2A5FF", name: "Soft Violet" }].map((color) => <button key={color.id} className={`color-choice ${settings.color === color.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, color: color.id }))}><span style={{ background: color.hex }} />{color.name}</button>)}</div></div>
         <div className="toggle-row"><div><strong>Show label</strong><span>Display “Copy wallet” beside the icon</span></div><button className={`toggle ${settings.label ? "on" : ""}`} onClick={() => setSettings((current) => ({ ...current, label: !current.label }))}><span /></button></div>
       </div></div></section>
       <footer><span>QUICKCOPY / PRIVATE UTILITY</span><span>Never paste a seed phrase. Only use public addresses.</span></footer>
