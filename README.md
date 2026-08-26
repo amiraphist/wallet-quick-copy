@@ -20,14 +20,12 @@ QuickCopy uses one source extension with two install targets: **Firefox** and **
 
 | Platform | Browser target | Status | Installation route |
 |---|---|---|---|
-| Windows and macOS | Firefox | Supported package target | Firefox package output. Production distribution requires Mozilla signing or AMO publication. |
-| Windows and macOS | Chrome | Supported package target | Chromium package output, then `chrome://extensions` → Developer mode → Load unpacked. |
-| Windows and macOS | Brave | Supported package target | Chromium package output, then `brave://extensions` → Developer mode → Load unpacked. |
-| Windows and macOS | Edge | Supported package target | Chromium package output, then `edge://extensions` → Developer mode → Load unpacked. |
-| Windows and macOS | Opera | Supported package target | Chromium package output, then Opera’s extensions page → Developer mode → Load unpacked. |
-| Windows and macOS | Arc | Supported package target | Chromium package output; Arc supports extensions on both desktop platforms. |
-
-Vivaldi is intentionally not a project support target.
+| Windows and macOS | Firefox | Package manifest validated | Firefox package output. Production distribution requires Mozilla signing or AMO publication; live runtime testing remains a target-device step. |
+| Windows and macOS | Chrome | Chromium package smoke-tested | Chromium package output, then `chrome://extensions` → Developer mode → Load unpacked. |
+| Windows and macOS | Brave | Shares Chromium package | Individual live-browser test remains a target-device step. |
+| Windows and macOS | Edge | Shares Chromium package | Individual live-browser test remains a target-device step. |
+| Windows and macOS | Opera | Shares Chromium package | Individual live-browser test remains a target-device step. |
+| Windows and macOS | Arc | Shares Chromium package | Individual live-browser test remains a target-device step. |
 
 ## Mobile web
 

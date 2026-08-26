@@ -1,5 +1,5 @@
 // Style: Neo-industrial product field guide — graphite surfaces, Lime Signal actions, asymmetric editorial rhythm.
-import { ArrowUpRight, Check, ChevronDown, CircleCheckBig, Copy, ExternalLink, LockKeyhole, MousePointerClick, ShieldCheck, Smartphone, WalletCards } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, CircleCheckBig, Copy, ExternalLink, LockKeyhole, MousePointerClick, ShieldCheck, WalletCards } from "lucide-react";
 import { Link } from "wouter";
 
 const HERO_IMAGE = "/manus-storage/quickcopy-hero-terminal_66fe5c56.png";
@@ -13,10 +13,10 @@ function QuickCopyLogo() {
 }
 
 const browsers = [
-  { name: "Firefox", family: "Firefox", icon: "/manus-storage/firefox_cd87e620.svg", download: FIREFOX_PACKAGE, file: "quickcopy-firefox.zip" },
+  { name: "Firefox", family: "Firefox", icon: "/manus-storage/firefox-outline_704b0a5c.svg", download: FIREFOX_PACKAGE, file: "quickcopy-firefox.zip" },
   { name: "Chrome", family: "Chromium", icon: "/manus-storage/googlechrome_cc3a975d.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
   { name: "Brave", family: "Chromium", icon: "/manus-storage/brave_3dbc3401.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
-  { name: "Edge", family: "Chromium", icon: "/manus-storage/microsoftedge_62f87194.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Edge", family: "Chromium", icon: "/manus-storage/edge-outline_b2834719.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
   { name: "Opera", family: "Chromium", icon: "/manus-storage/opera_383802da.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
   { name: "Arc", family: "Chromium", icon: "/manus-storage/arc_16409c5f.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
 ];
@@ -38,7 +38,7 @@ export default function Landing() {
           <div className="hero-actions"><Link href="/dashboard" className="primary-cta">Open wallet dashboard <ArrowUpRight size={17} /></Link><a href="#workflow" className="text-cta">See the flow <ChevronDown size={16} /></a></div>
           <div className="hero-assurance"><span><Check size={14} /> Public addresses only</span><span><Check size={14} /> Never auto-posts</span></div>
         </div>
-        <div className="hero-frame"><div className="hero-frame-label">LIVE ON X WEB <span>01</span></div><img src={HERO_IMAGE} alt="Abstract QuickCopy browser workflow" /><div className="hero-frame-note"><MousePointerClick size={15} /><span>Choose. Copy. Review. Post.</span></div></div>
+        <div className="hero-frame"><img src={HERO_IMAGE} alt="Abstract QuickCopy browser workflow" /><div className="hero-frame-note"><MousePointerClick size={15} /><span>Choose. Copy. Review. Post.</span></div></div>
       </section>
 
       <section id="workflow" className="process-section">
@@ -55,9 +55,8 @@ export default function Landing() {
         <div className="detail-copy"><div className="marketing-kicker"><span /> DESIGNED FOR THE MOMENT</div><h2>Your wallet list,<br /><em>where it matters.</em></h2><p>The in-page chooser only appears when a post asks for a compatible wallet address. It stays compact, reflects your saved labels, and never creates a reply by itself.</p><Link href="/dashboard" className="inline-link">Set up your ten addresses <ArrowUpRight size={16} /></Link></div>
       </section>
 
-      <section id="compatibility" className="compatibility-section">
-        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>Choose your browser and download its matching package. Firefox receives its own build; Chrome, Brave, Edge, Opera, and Arc share the Chromium build.</p><div className="browser-downloads" aria-label="QuickCopy browser package downloads">{browsers.map((browser) => <a key={browser.name} className="browser-download" href={browser.download} download={browser.file} title={`Download QuickCopy for ${browser.name}`}><img src={browser.icon} alt="" /><span><strong>{browser.name}</strong><small>{browser.family}</small></span><ArrowUpRight size={15} /></a>)}</div><p className="download-note">Firefox package: load temporarily for testing until signed distribution. Chromium package: unzip, then choose “Load unpacked” in the browser’s extensions page.</p></div>
-        <div className="compatibility-card"><div className="card-topline"><span>PLATFORM MATRIX</span><span>DESKTOP</span></div><div className="platform-row"><span>Windows</span><strong>Firefox · Chrome · Brave · Edge · Opera · Arc</strong><Check size={18} /></div><div className="platform-row"><span>macOS</span><strong>Firefox · Chrome · Brave · Edge · Opera · Arc</strong><Check size={18} /></div><div className="platform-row mobile"><Smartphone size={17} /><div><span>Mobile web dashboard</span><strong>Android and iOS browsers</strong></div><Check size={18} /></div><p className="compatibility-note">The dashboard is available on mobile web for wallet management. The X in-page action is a desktop browser-extension feature; native X apps are not modified.</p></div>
+      <section id="compatibility" className="compatibility-section compatibility-single">
+        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>Choose your browser and download its matching package. Firefox receives its own build; Chrome, Brave, Edge, Opera, and Arc share the Chromium build.</p><div className="browser-downloads" aria-label="QuickCopy browser package downloads">{browsers.map((browser) => <a key={browser.name} className="browser-download" href={browser.download} download={browser.file} title={`Download QuickCopy for ${browser.name}`}><img src={browser.icon} alt="" /><span><strong>{browser.name}</strong><small>{browser.family}</small></span><ArrowUpRight size={15} /></a>)}</div><p className="download-note">Both package manifests are built and checked; the Chromium package is smoke-loaded in Chromium in this workspace. Firefox needs signed distribution for persistent installation. Chromium browsers use the same package after “Load unpacked.” The dashboard itself is available for wallet management in Android and iOS browsers.</p></div>
       </section>
 
       <section id="safety" className="safety-section"><div className="safety-copy"><div className="marketing-kicker"><span /> LOCAL BY DESIGN</div><h2>Public data only.<br /><em>Control stays with you.</em></h2><p>Wallet labels, public addresses, ordering, and appearance preferences are stored locally. QuickCopy does not ask for seed phrases or private keys, and it does not send replies automatically.</p><Link href="/dashboard" className="primary-cta">Manage public addresses <ArrowUpRight size={17} /></Link></div><div className="safety-visual"><img src={LOCAL_IMAGE} alt="Abstract privacy and local control concept" /><div className="safety-badge"><LockKeyhole size={17} /><span><strong>LOCAL FIRST</strong><small>No seed phrases. No private keys.</small></span></div></div></section>

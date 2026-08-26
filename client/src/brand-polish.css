@@ -64,7 +64,11 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
   margin-top: 25px;
+  max-width: 780px;
 }
+
+.compatibility-section.compatibility-single { grid-template-columns: 1fr; }
+.compatibility-single .compatibility-copy > p { max-width: 610px; }
 
 .browser-download {
   display: grid;
