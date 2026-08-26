@@ -28,7 +28,7 @@ async function addQuickCopy(post) {
   if (post.hasAttribute(INJECTED) || !isWalletRequest(postText(post))) return;
   const actions = findActions(post); if (!actions) return;
   post.setAttribute(INJECTED, 'true');
-  const wallets = (await readStorage(QUICKCOPY_KEY, fallbackWallets)).slice(0, 5); if (!wallets.length) { post.removeAttribute(INJECTED); return; }
+  const wallets = (await readStorage(QUICKCOPY_KEY, fallbackWallets)).slice(0, 10); if (!wallets.length) { post.removeAttribute(INJECTED); return; }
   const settings = { ...DEFAULT_SETTINGS, ...(await readStorage(SETTINGS_KEY, DEFAULT_SETTINGS)) }; const shape = settings.shape === 'circle' ? 'circle' : 'rounded';
   actions.classList.add('quickcopy-anchor-host');
   const wrapper = document.createElement('div'); wrapper.className = 'quickcopy-wrapper quickcopy-fixed';

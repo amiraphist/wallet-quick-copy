@@ -1,6 +1,6 @@
 # QuickCopy
 
-QuickCopy is a local-first public-wallet helper for X on the web. Save up to five **Ethereum** or **Solana** public addresses, choose one from a compact in-page menu when a relevant post appears, copy it, and insert it into the reply composer. QuickCopy never sends the reply for you.
+QuickCopy is a local-first public-wallet helper for X on the web. Save up to ten **Ethereum** or **Solana** public addresses, choose one from a compact in-page menu when a relevant post appears, copy it, and insert it into the reply composer. QuickCopy never sends the reply for you.
 
 ## What QuickCopy does
 
@@ -8,7 +8,7 @@ QuickCopy keeps public address handling fast without taking control away from th
 
 | Capability | Behavior |
 |---|---|
-| Wallet library | Create, edit, delete, and reorder up to five labelled public addresses. |
+| Wallet library | Create, edit, delete, and reorder up to ten labelled public addresses. |
 | X workflow | Detects relevant X/Twitter posts, shows one wallet-picker trigger, copies the chosen address, and inserts it into the reply composer. |
 | Final reply | The user always reviews and manually presses the final Post button. |
 | Local-first settings | Wallet labels, public addresses, order, theme, and trigger appearance are stored locally in the browser. |
@@ -56,7 +56,7 @@ pnpm extension:firefox
 pnpm extension:chromium
 ```
 
-Both commands build from the same `extension/` source directory. The generated directories are written under `artifacts/` and are deliberately ignored by Git.
+Both commands build from the same `extension/` source directory. The generated directories are written under `artifacts/` and are deliberately ignored by Git. The product site provides matching Firefox and Chromium ZIP downloads from web storage; they are not committed to the public source repository.
 
 | Command | Output |
 |---|---|

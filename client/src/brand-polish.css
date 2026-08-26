@@ -1,26 +1,4 @@
 /* Style: Lime Signal is reserved for operational status; the active wallet uses a repeatable instrument edge. */
-.custom-wordmark {
-  position: relative;
-  display: block;
-}
-
-.custom-wordmark i {
-  position: relative;
-  display: inline-block;
-  font-style: normal;
-}
-
-.custom-wordmark i::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  bottom: 1px;
-  width: 6px;
-  height: 2px;
-  background: var(--lime);
-  transform: skewX(-28deg);
-}
-
 .deck-rail {
   position: absolute;
   top: 26px;
@@ -81,7 +59,63 @@
   color: var(--lime);
 }
 
-@media (max-width: 820px) {
-  .deck-rail { display: none; }
+.browser-downloads {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 25px;
 }
 
+.browser-download {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) 12px;
+  align-items: center;
+  gap: 7px;
+  min-height: 54px;
+  padding: 8px;
+  color: #d7d9d1;
+  text-decoration: none;
+  border: 1px solid #30352c;
+  background: rgba(255,255,255,.015);
+  transition: border-color .16s ease, background .16s ease, transform .16s cubic-bezier(.23,1,.32,1), color .16s ease;
+}
+
+.browser-download img {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(76%) sepia(6%) saturate(328%) hue-rotate(43deg) brightness(87%) contrast(84%);
+  transition: filter .16s ease;
+}
+
+.browser-download span { min-width: 0; }
+.browser-download strong, .browser-download small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.browser-download strong { font: 600 10px 'Space Grotesk'; }
+.browser-download small { margin-top: 3px; color: #777c70; font: 7px 'IBM Plex Mono'; letter-spacing: .4px; }
+.browser-download svg { color: #777c70; }
+
+.browser-download:hover {
+  transform: translateY(-2px);
+  color: var(--lime);
+  border-color: var(--lime);
+  background: rgba(215,255,79,.055);
+}
+
+.browser-download:hover img { filter: brightness(0) saturate(100%) invert(94%) sepia(72%) saturate(1061%) hue-rotate(27deg) brightness(104%) contrast(101%); }
+.browser-download:hover svg { color: var(--lime); }
+
+.download-note {
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: #74786e;
+  font: 9px/1.6 'IBM Plex Mono';
+}
+
+@media (max-width: 820px) {
+  .deck-rail { display: none; }
+  .browser-downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 440px) {
+  .browser-downloads { grid-template-columns: 1fr; }
+}

@@ -5,24 +5,26 @@ import { Link } from "wouter";
 const HERO_IMAGE = "/manus-storage/quickcopy-hero-terminal_66fe5c56.png";
 const FLOW_IMAGE = "/manus-storage/quickcopy-flow-detail_b1ce2744.png";
 const LOCAL_IMAGE = "/manus-storage/quickcopy-local-first_13f5439b.png";
+const FIREFOX_PACKAGE = "/manus-storage/quickcopy-firefox_0c0dcdef.zip";
+const CHROMIUM_PACKAGE = "/manus-storage/quickcopy-chromium_7e584803.zip";
 
 function QuickCopyLogo() {
   return <img src="/manus-storage/quickcopy-nested-logo_da2ae5c5.png" alt="QuickCopy" />;
 }
 
-function Wordmark() {
-  return <strong className="custom-wordmark"><i>q</i>uick<span>copy</span></strong>;
-}
-
 const browsers = [
-  { group: "Firefox", items: ["Firefox"] },
-  { group: "Chromium", items: ["Chrome", "Brave", "Edge", "Opera", "Arc"] },
+  { name: "Firefox", family: "Firefox", icon: "/manus-storage/firefox_cd87e620.svg", download: FIREFOX_PACKAGE, file: "quickcopy-firefox.zip" },
+  { name: "Chrome", family: "Chromium", icon: "/manus-storage/googlechrome_cc3a975d.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Brave", family: "Chromium", icon: "/manus-storage/brave_3dbc3401.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Edge", family: "Chromium", icon: "/manus-storage/microsoftedge_62f87194.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Opera", family: "Chromium", icon: "/manus-storage/opera_383802da.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Arc", family: "Chromium", icon: "/manus-storage/arc_16409c5f.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
 ];
 
 export default function Landing() {
   return <div className="marketing-shell">
     <header className="marketing-nav">
-      <Link href="/" className="marketing-brand" aria-label="QuickCopy home"><span className="marketing-mark"><QuickCopyLogo /></span><span><Wordmark /><small>PUBLIC WALLET UTILITY</small></span></Link>
+      <Link href="/" className="marketing-brand" aria-label="QuickCopy home"><span className="marketing-mark"><QuickCopyLogo /></span><span><strong>quick<span>copy</span></strong><small>PUBLIC WALLET UTILITY</small></span></Link>
       <nav aria-label="Product navigation"><a href="#workflow">Workflow</a><a href="#compatibility">Compatibility</a><a href="#safety">Safety</a></nav>
       <Link href="/dashboard" className="nav-dashboard">Open dashboard <ArrowUpRight size={15} /></Link>
     </header>
@@ -42,7 +44,7 @@ export default function Landing() {
       <section id="workflow" className="process-section">
         <div className="section-heading"><div><div className="marketing-kicker"><span /> THE FAST PATH</div><h2>Three deliberate steps.<br />No hidden automation.</h2></div><p>QuickCopy keeps the final decision with you. It speeds up repetitive address handling, not your voice on X.</p></div>
         <div className="process-grid">
-          <article><span className="step-number">01</span><WalletCards size={22} /><h3>Save public addresses</h3><p>Add up to five Ethereum or Solana addresses, label them clearly, and set the order you want to see.</p></article>
+          <article><span className="step-number">01</span><WalletCards size={22} /><h3>Save public addresses</h3><p>Add up to ten Ethereum or Solana addresses, label them clearly, and set the order you want to see.</p></article>
           <article><span className="step-number">02</span><Copy size={22} /><h3>Choose from the post</h3><p>On relevant X posts, one compact trigger opens the wallet list you already configured.</p></article>
           <article><span className="step-number">03</span><CircleCheckBig size={22} /><h3>Review, then post</h3><p>The selected address is copied and inserted into the reply composer. You remain responsible for the final Post action.</p></article>
         </div>
@@ -50,17 +52,17 @@ export default function Landing() {
 
       <section className="detail-band">
         <div className="detail-image"><img src={FLOW_IMAGE} alt="Abstract wallet picker detail" /><div className="detail-stamp">WALLET PICKER<br /><span>ONE POST · ONE DECISION</span></div></div>
-        <div className="detail-copy"><div className="marketing-kicker"><span /> DESIGNED FOR THE MOMENT</div><h2>Your wallet list,<br /><em>where it matters.</em></h2><p>The in-page chooser only appears when a post asks for a compatible wallet address. It stays compact, reflects your saved labels, and never creates a reply by itself.</p><Link href="/dashboard" className="inline-link">Set up your five addresses <ArrowUpRight size={16} /></Link></div>
+        <div className="detail-copy"><div className="marketing-kicker"><span /> DESIGNED FOR THE MOMENT</div><h2>Your wallet list,<br /><em>where it matters.</em></h2><p>The in-page chooser only appears when a post asks for a compatible wallet address. It stays compact, reflects your saved labels, and never creates a reply by itself.</p><Link href="/dashboard" className="inline-link">Set up your ten addresses <ArrowUpRight size={16} /></Link></div>
       </section>
 
       <section id="compatibility" className="compatibility-section">
-        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>QuickCopy uses two install targets: a Firefox package and a Chromium package. That keeps the browser-specific setup explicit while preserving the same wallet workflow.</p><div className="browser-lines">{browsers.map((family) => <div key={family.group}><strong>{family.group}</strong><span>{family.items.join(" · ")}</span></div>)}</div></div>
+        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>Choose your browser and download its matching package. Firefox receives its own build; Chrome, Brave, Edge, Opera, and Arc share the Chromium build.</p><div className="browser-downloads" aria-label="QuickCopy browser package downloads">{browsers.map((browser) => <a key={browser.name} className="browser-download" href={browser.download} download={browser.file} title={`Download QuickCopy for ${browser.name}`}><img src={browser.icon} alt="" /><span><strong>{browser.name}</strong><small>{browser.family}</small></span><ArrowUpRight size={15} /></a>)}</div><p className="download-note">Firefox package: load temporarily for testing until signed distribution. Chromium package: unzip, then choose “Load unpacked” in the browser’s extensions page.</p></div>
         <div className="compatibility-card"><div className="card-topline"><span>PLATFORM MATRIX</span><span>DESKTOP</span></div><div className="platform-row"><span>Windows</span><strong>Firefox · Chrome · Brave · Edge · Opera · Arc</strong><Check size={18} /></div><div className="platform-row"><span>macOS</span><strong>Firefox · Chrome · Brave · Edge · Opera · Arc</strong><Check size={18} /></div><div className="platform-row mobile"><Smartphone size={17} /><div><span>Mobile web dashboard</span><strong>Android and iOS browsers</strong></div><Check size={18} /></div><p className="compatibility-note">The dashboard is available on mobile web for wallet management. The X in-page action is a desktop browser-extension feature; native X apps are not modified.</p></div>
       </section>
 
       <section id="safety" className="safety-section"><div className="safety-copy"><div className="marketing-kicker"><span /> LOCAL BY DESIGN</div><h2>Public data only.<br /><em>Control stays with you.</em></h2><p>Wallet labels, public addresses, ordering, and appearance preferences are stored locally. QuickCopy does not ask for seed phrases or private keys, and it does not send replies automatically.</p><Link href="/dashboard" className="primary-cta">Manage public addresses <ArrowUpRight size={17} /></Link></div><div className="safety-visual"><img src={LOCAL_IMAGE} alt="Abstract privacy and local control concept" /><div className="safety-badge"><LockKeyhole size={17} /><span><strong>LOCAL FIRST</strong><small>No seed phrases. No private keys.</small></span></div></div></section>
     </main>
 
-    <footer className="marketing-footer"><div className="marketing-brand"><span className="marketing-mark"><QuickCopyLogo /></span><span><Wordmark /><small>WALLET CONTROL</small></span></div><p>Copy public addresses with precision. The final reply is always yours.</p><div><a href="https://github.com/amiraphist/wallet-quick-copy" target="_blank" rel="noreferrer">Source <ExternalLink size={13} /></a><a href="https://x.com/amiraphist" target="_blank" rel="noreferrer">A project by @amiraphist <ExternalLink size={13} /></a></div></footer>
+    <footer className="marketing-footer"><div className="marketing-brand"><span className="marketing-mark"><QuickCopyLogo /></span><span><strong>quick<span>copy</span></strong><small>WALLET CONTROL</small></span></div><p>Copy public addresses with precision. The final reply is always yours.</p><div><a href="https://github.com/amiraphist/wallet-quick-copy" target="_blank" rel="noreferrer">Source <ExternalLink size={13} /></a><a href="https://x.com/amiraphist" target="_blank" rel="noreferrer">A project by @amiraphist</a></div></footer>
   </div>;
 }

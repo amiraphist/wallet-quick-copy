@@ -7,6 +7,7 @@ import { Link } from "wouter";
 type Wallet = { id: number; name: string; network: "Ethereum" | "Solana"; address: string; full: string; color: string; uses: number; pinned: boolean };
 type QuickCopySettings = { color: string; label: boolean; shape: "circle" | "rounded"; size: "medium" | "large" };
 type Theme = "dark" | "light";
+const WALLET_LIMIT = 10;
 
 const initialWallets: Wallet[] = [
   { id: 1, name: "Main Ethereum", network: "Ethereum", address: "0x7A3f...91cB", full: "0x7A3f19d5B7D6a44f6aE3cE6aC7bF1b2a91cB", color: "lime", uses: 42, pinned: true },
@@ -72,7 +73,7 @@ export default function Home() {
       setWallets((items) => items.map((wallet) => wallet.id === editingId ? { ...wallet, name: newName.trim(), network: newNetwork, full, address, color: newNetwork === "Solana" ? "violet" : "lime" } : wallet));
       toast.success("Wallet updated");
     } else {
-      if (wallets.length >= 5) return toast.error("Wallet limit reached");
+      if (wallets.length >= WALLET_LIMIT) return toast.error("Wallet limit reached");
       setWallets((items) => [...items, { id: Date.now(), name: newName.trim(), network: newNetwork, address, full, color: newNetwork === "Solana" ? "violet" : "lime", uses: 0, pinned: false }]);
       toast.success("Wallet added");
     }
@@ -90,7 +91,7 @@ export default function Home() {
 
   return <div className={`app-shell ${theme === "light" ? "light-mode" : ""}`}>
     <aside className="sidebar">
-      <div className="brand"><div className="brand-mark brand-logo"><QuickCopyLogo /></div><div><strong className="custom-wordmark"><i>q</i>uick<span>copy</span></strong><small>WALLET CONTROL</small></div></div>
+      <div className="brand"><div className="brand-mark brand-logo"><QuickCopyLogo /></div><div><strong>quick<span>copy</span></strong><small>WALLET CONTROL</small></div></div>
       <div className="side-label">Workspace</div>
       <nav>
         <button className="nav-item active"><WalletCards size={17} /> Wallets <b>{wallets.length}</b></button>
@@ -101,8 +102,8 @@ export default function Home() {
     </aside>
     <main className="main-content">
       <header className="topbar"><div className="breadcrumb"><span>Workspace</span><i>/</i><strong>Wallets</strong></div><Link href="/" className="product-link">Product site <span>↗</span></Link></header>
-      <section className="hero"><div><div className="eyebrow"><span className="pulse-dot" /> PERSONAL CONTROL DECK</div><h1>Copy once.<br /><em>Move faster.</em></h1><p>Your public addresses, one click away from the next whitelist.</p></div><aside className="deck-rail" aria-label="Dashboard status"><div><span>LOCAL STORAGE</span><strong><ShieldCheck size={14} /> READY</strong></div><div><span>WALLET SLOTS</span><strong>{wallets.length} / 5</strong></div><div><span>FINAL ACTION</span><strong>MANUAL POST</strong></div></aside></section>
-      <section className="workspace-head"><div><div className="section-kicker">YOUR TOOLKIT <span>·</span> {wallets.length}/5 ADDRESSES</div><h2>Wallet library</h2></div><button className="add-btn" onClick={openCreate} disabled={wallets.length >= 5}><Plus size={18} /> {wallets.length >= 5 ? "Limit reached" : "Add wallet"}</button></section>
+      <section className="hero"><div><div className="eyebrow"><span className="pulse-dot" /> PERSONAL CONTROL DECK</div><h1>Copy once.<br /><em>Move faster.</em></h1><p>Your public addresses, one click away from the next whitelist.</p></div><aside className="deck-rail" aria-label="Dashboard status"><div><span>LOCAL STORAGE</span><strong><ShieldCheck size={14} /> READY</strong></div><div><span>WALLET SLOTS</span><strong>{wallets.length} / {WALLET_LIMIT}</strong></div><div><span>FINAL ACTION</span><strong>MANUAL POST</strong></div></aside></section>
+      <section className="workspace-head"><div><div className="section-kicker">YOUR TOOLKIT <span>·</span> {wallets.length}/{WALLET_LIMIT} ADDRESSES</div><h2>Wallet library</h2></div><button className="add-btn" onClick={openCreate} disabled={wallets.length >= WALLET_LIMIT}><Plus size={18} /> {wallets.length >= WALLET_LIMIT ? "Limit reached" : "Add wallet"}</button></section>
       <div className="toolbar"><div className="search-box"><Search size={16} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search wallets or networks" /></div></div>
       <div className="wallet-list">
         {filtered.map((wallet) => <article key={wallet.id} onDragOver={(event) => { event.preventDefault(); if (draggedId !== wallet.id) setDragOverId(wallet.id); }} onDrop={(event) => { event.preventDefault(); if (draggedId !== null) moveWallet(draggedId, wallet.id); setDraggedId(null); setDragOverId(null); }} className={`wallet-row ${wallet.pinned ? "is-pinned" : ""} ${dragOverId === wallet.id ? "drag-over" : ""}`}>
@@ -114,7 +115,7 @@ export default function Home() {
           <button type="button" className="row-delete" onClick={() => removeWallet(wallet.id)} aria-label={`Delete ${wallet.name}`}><Trash2 size={15} /></button>
         </article>)}
         {filtered.length === 0 && <div className="empty-row">No wallets match your search.</div>}
-        <button className="empty-add row-add" onClick={openCreate} disabled={wallets.length >= 5}><Plus size={18} /><span>{wallets.length >= 5 ? "Wallet limit reached" : "Add another wallet"}</span></button>
+        <button className="empty-add row-add" onClick={openCreate} disabled={wallets.length >= WALLET_LIMIT}><Plus size={18} /><span>{wallets.length >= WALLET_LIMIT ? "Wallet limit reached" : "Add another wallet"}</span></button>
       </div>
       <section id="settings" className="settings-section compact-settings"><div className="settings-intro"><div><div className="section-kicker">CONTROL PANEL <span>·</span> EXTENSION UI</div><h2>Button style</h2><p>Keep the action clear and consistent in every X theme.</p></div><div className="settings-saved"><Check size={14} /> Saved locally</div></div><div className="settings-layout settings-layout-single"><div className="settings-controls">
         <div className="setting-group"><label>BUTTON SHAPE <span>Pick the silhouette used on X</span></label><div className="shape-row">{([{ id: "circle", label: "Circle" }, { id: "rounded", label: "Rounded" }] as const).map((shape) => <button key={shape.id} aria-label={shape.label} className={`shape-choice shape-${shape.id} ${settings.shape === shape.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, shape: shape.id }))}><ShapeIcon shape={shape.id} /></button>)}</div></div>
