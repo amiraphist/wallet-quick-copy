@@ -108,6 +108,28 @@
 .browser-download:hover img { filter: brightness(0) saturate(100%) invert(94%) sepia(72%) saturate(1061%) hue-rotate(27deg) brightness(104%) contrast(101%); }
 .browser-download:hover svg { color: var(--lime); }
 
+.browser-download.is-separate {
+  border-style: dashed;
+  color: #969b90;
+  cursor: default;
+}
+
+.browser-download.is-separate em {
+  color: #73786d;
+  font: 7px 'IBM Plex Mono';
+  letter-spacing: .5px;
+  font-style: normal;
+}
+
+.browser-download.is-separate:hover {
+  transform: none;
+  color: #969b90;
+  border-color: #545a4f;
+  background: rgba(255,255,255,.015);
+}
+
+.browser-download.is-separate:hover img { filter: brightness(0) saturate(100%) invert(76%) sepia(6%) saturate(328%) hue-rotate(43deg) brightness(87%) contrast(84%); }
+
 .download-note {
   max-width: 520px;
   margin: 14px 0 0;
@@ -115,11 +137,106 @@
   font: 9px/1.6 'IBM Plex Mono';
 }
 
+.quickcopy-wordmark {
+  display: block;
+  color: #f0efe9;
+  font: 700 19px/1 'Space Grotesk';
+  letter-spacing: -1.25px;
+}
+
+.quickcopy-wordmark i {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  letter-spacing: -2px;
+}
+
+.quickcopy-wordmark i::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: 1px;
+  width: 7px;
+  height: 2px;
+  background: var(--lime);
+  transform: skewX(-28deg);
+}
+
+.quickcopy-wordmark span { color: var(--lime); }
+
+.hero-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 505px;
+  margin-top: 27px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-telemetry div { min-width: 0; padding: 10px 10px 9px 0; border-right: 1px solid var(--line); }
+.hero-telemetry div + div { padding-left: 11px; }
+.hero-telemetry div:last-child { border-right: 0; }
+.hero-telemetry span, .process-state span, .compatibility-status span, .wallet-readout small { display: block; color: #767b70; font: 8px 'IBM Plex Mono'; letter-spacing: .7px; }
+.hero-telemetry strong { display: block; margin-top: 5px; overflow: hidden; color: var(--lime); font: 600 9px 'IBM Plex Mono'; letter-spacing: .25px; text-overflow: ellipsis; white-space: nowrap; }
+
+.process-state {
+  position: absolute;
+  left: 28px;
+  right: 63px;
+  top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(215,255,79,.17);
+}
+
+.process-state strong { color: var(--lime); font: 8px 'IBM Plex Mono'; letter-spacing: .45px; }
+.process-grid article>svg { margin-top: 65px; }
+
+.wallet-readout {
+  display: grid;
+  grid-template-columns: 3px minmax(0,1fr) auto 16px;
+  align-items: center;
+  gap: 10px;
+  max-width: 445px;
+  margin: 24px 0 25px;
+  padding: 10px 11px 10px 0;
+  border-top: 1px solid rgba(24,32,23,.2);
+  border-bottom: 1px solid rgba(24,32,23,.2);
+}
+
+.readout-rail { align-self: stretch; background: var(--lime); }
+.wallet-readout strong { display: block; margin-top: 4px; color: #182017; font: 600 11px 'Space Grotesk'; }
+.wallet-readout code { color: #586056; font: 9px 'IBM Plex Mono'; }
+.wallet-readout svg { color: #182017; }
+
+.compatibility-status {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  max-width: 780px;
+  margin-top: 24px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.compatibility-status strong { color: #d7d9d1; font: 9px 'IBM Plex Mono'; letter-spacing: .4px; }
+.compatibility-status strong i { display: inline-block; width: 5px; height: 5px; margin-right: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 4px rgba(215,255,79,.09); vertical-align: 1px; }
+.compatibility-status code { grid-column: 1 / -1; color: #73786e; font: 8px 'IBM Plex Mono'; letter-spacing: .5px; }
+
 @media (max-width: 820px) {
   .deck-rail { display: none; }
   .browser-downloads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-telemetry { max-width: 620px; }
 }
 
 @media (max-width: 440px) {
   .browser-downloads { grid-template-columns: 1fr; }
+  .hero-telemetry { grid-template-columns: 1fr; }
+  .hero-telemetry div, .hero-telemetry div + div { padding: 9px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .hero-telemetry div:last-child { border-bottom: 0; }
+  .wallet-readout { grid-template-columns: 3px minmax(0,1fr) 16px; }
+  .wallet-readout code { display: none; }
 }

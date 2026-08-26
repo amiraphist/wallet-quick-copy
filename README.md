@@ -26,6 +26,7 @@ QuickCopy uses one source extension with two install targets: **Firefox** and **
 | Windows and macOS | Edge | Shares Chromium package | Individual live-browser test remains a target-device step. |
 | Windows and macOS | Opera | Shares Chromium package | Individual live-browser test remains a target-device step. |
 | Windows and macOS | Arc | Shares Chromium package | Individual live-browser test remains a target-device step. |
+| macOS, iPhone, and iPad | Safari | Separate target | A Safari Web Extension wrapper must be packaged with Xcode and distributed through Apple’s supported route; no Safari download is published yet. |
 
 ## Mobile web
 
@@ -71,6 +72,10 @@ Open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, 
 ### Chrome, Brave, Edge, Opera, and Arc
 
 Open the browser’s extensions page, enable **Developer mode**, choose **Load unpacked**, and select `artifacts/quickcopy-chromium/`. When testing on X, refresh the X tab after the extension has been loaded.
+
+### Safari
+
+Safari requires a separate Safari Web Extension wrapper and an Apple/Xcode packaging path. It is listed as a product target, but this repository does not yet include a Safari wrapper or a Safari download.
 
 ## Safety
 
