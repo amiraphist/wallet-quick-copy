@@ -1,0 +1,29 @@
+/* Style: Dashboard controls follow the control-room grid; paired trigger settings scan side-by-side. */
+.shape-size-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  padding-bottom: 21px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.shape-size-row .setting-group {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.shape-size-row .setting-group label {
+  min-height: 26px;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shape-size-row .setting-group label span { line-height: 1.3; }
+
+@media (max-width: 420px) {
+  .shape-size-row { gap: 14px; }
+}

@@ -23,21 +23,8 @@ QuickCopy uses one source extension with two install targets: **Firefox** and **
 | Windows and macOS | Firefox | Package manifest validated | Firefox package output. Production distribution requires Mozilla signing or AMO publication; live runtime testing remains a target-device step. |
 | Windows and macOS | Chrome | Chromium package smoke-tested | Chromium package output, then `chrome://extensions` → Developer mode → Load unpacked. |
 | Windows and macOS | Brave | Shares Chromium package | Individual live-browser test remains a target-device step. |
-| Windows and macOS | Edge | Shares Chromium package | Individual live-browser test remains a target-device step. |
 | Windows and macOS | Opera | Shares Chromium package | Individual live-browser test remains a target-device step. |
 | Windows and macOS | Arc | Shares Chromium package | Individual live-browser test remains a target-device step. |
-| macOS, iPhone, and iPad | Safari | Separate target | A Safari Web Extension wrapper must be packaged with Xcode and distributed through Apple’s supported route; no Safari download is published yet. |
-
-## Mobile web
-
-The **QuickCopy website and wallet dashboard** are responsive and can be used in modern Android and iOS browsers for local wallet management. The X in-page wallet picker is a desktop browser-extension workflow.
-
-| Mobile scenario | Current availability |
-|---|---|
-| Android or iOS browser opens the product site / dashboard | Available for wallet management on the web. |
-| Native X app | Not supported; browser extensions cannot modify native X apps. |
-| Firefox for Android extension | Not part of this release. It requires device-specific compatibility testing and mobile add-on distribution. |
-| iPhone/iPad Safari extension | Separate target. Safari Web Extensions need a Safari/Xcode or App Store packaging path. |
 
 ## Local development
 
@@ -69,13 +56,9 @@ Both commands build from the same `extension/` source directory. The generated d
 
 Open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `artifacts/quickcopy-firefox/manifest.json`. Temporary loading is for testing; a persistent public Firefox install needs signed distribution through Mozilla’s supported route.
 
-### Chrome, Brave, Edge, Opera, and Arc
+### Chrome, Brave, Opera, and Arc
 
 Open the browser’s extensions page, enable **Developer mode**, choose **Load unpacked**, and select `artifacts/quickcopy-chromium/`. When testing on X, refresh the X tab after the extension has been loaded.
-
-### Safari
-
-Safari requires a separate Safari Web Extension wrapper and an Apple/Xcode packaging path. It is listed as a product target, but this repository does not yet include a Safari wrapper or a Safari download.
 
 ## Safety
 
@@ -87,7 +70,5 @@ The public repository is [github.com/amiraphist/wallet-quick-copy](https://githu
 
 ## External platform references
 
-- [Firefox for Android extension compatibility](https://extensionworkshop.com/documentation/develop/developing-extensions-for-firefox-for-android/)
 - [Chrome extension installation guidance](https://support.google.com/chrome_webstore/answer/2664769?hl=en)
 - [Arc extensions on macOS and Windows](https://resources.arc.net/hc/en-us/articles/19434259167767-Extensions-in-Arc-How-to-Import-Add-Open)
-- [Apple Safari extensions](https://developer.apple.com/safari/extensions/)

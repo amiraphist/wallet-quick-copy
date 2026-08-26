@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./brand-polish.css";
+@import "./dashboard-layout.css";
 
 /* Style: neo-industrial utility — charcoal, bone, Lime Signal; action-first motion. */
 :root { font-family: 'DM Sans', sans-serif; color: #f4f0e7; background: #111210; font-synthesis: none; --lime: #d7ff4f; --bone: #f4f0e7; --muted: #92938c; --line: rgba(244,240,231,.12); }
