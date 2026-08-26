@@ -1,0 +1,40 @@
+/* Style: one compact reference-aligned control anchored above the X action row. */
+.quickcopy-anchor-host { position: relative !important; overflow: visible !important; }
+.quickcopy-wrapper { position: absolute !important; right: 0; bottom: calc(100% + 8px); z-index: 9999; font-family: Arial, sans-serif; }
+.quickcopy-trigger { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 8px 11px; border: 1px solid transparent; border-radius: 18px; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .7px; line-height: 1; text-transform: uppercase; white-space: nowrap; transition: background .16s ease, color .16s ease, box-shadow .16s ease, transform .16s ease; }
+.quickcopy-trigger:active { transform: scale(.97); }
+.quickcopy-trigger.quickcopy-on-light { background: #050505; color: #f4f0e7; border-color: #050505; box-shadow: 0 2px 8px rgba(0,0,0,.16); }
+.quickcopy-trigger.quickcopy-on-dark { background: #171915; color: #d7ff4f; border-color: currentColor; box-shadow: 0 0 0 1px rgba(17,18,16,.55); }
+.quickcopy-trigger.quickcopy-on-light:hover, .quickcopy-trigger.quickcopy-on-light.is-copied { color: #d7ff4f; border-color: #d7ff4f; }
+.quickcopy-trigger.quickcopy-on-dark:hover, .quickcopy-trigger.quickcopy-on-dark.is-copied { box-shadow: 0 0 0 1px currentColor, 0 4px 12px rgba(0,0,0,.25); }
+.quickcopy-color-sky { color: #85d8ff; }.quickcopy-color-coral { color: #ff9c72; }.quickcopy-color-violet { color: #c2a5ff; }.quickcopy-color-lime { color: #d7ff4f; }
+.quickcopy-diamond { font-size: 14px; line-height: 1; }.quickcopy-chevron { font-size: 14px; line-height: 1; margin-left: 1px; transition: transform .18s ease; }.quickcopy-wrapper:has(.quickcopy-menu.is-open) .quickcopy-chevron { transform: rotate(180deg); }
+.quickcopy-menu { position: absolute; right: 0; bottom: calc(100% + 8px); display: block; width: 270px; max-width: min(270px, calc(100vw - 24px)); padding: 8px; overflow: hidden; pointer-events: none; opacity: 0; transform: translateY(6px) scale(.97); transform-origin: bottom right; background: #171915; border: 1px solid #454b3e; border-radius: 4px; box-shadow: 0 16px 35px rgba(0,0,0,.38); transition: opacity .18s cubic-bezier(.23,1,.32,1), transform .18s cubic-bezier(.23,1,.32,1); }
+.quickcopy-menu.is-open { pointer-events: auto; opacity: 1; transform: translateY(0) scale(1); }
+.quickcopy-menu-heading { display: flex; align-items: baseline; justify-content: space-between; padding: 6px 7px 9px; color: #f4f0e7; font-size: 9px; letter-spacing: 1px; }.quickcopy-menu-heading small { color: #73786d; font-size: 8px; letter-spacing: .5px; }
+.quickcopy-list { display: flex; flex-direction: column; gap: 5px; }.quickcopy-item { display: grid; grid-template-columns: 28px minmax(0,1fr) auto; align-items: center; gap: 8px; width: 100%; min-height: 51px; padding: 7px 8px; border: 1px solid #30352c; background: #1d211b; color: #f4f0e7; text-align: left; cursor: pointer; transition: background .15s ease, border-color .15s ease, transform .15s ease; }.quickcopy-item:hover { background: #252b1d; border-color: #d7ff4f; }.quickcopy-item:active { transform: scale(.985); }.quickcopy-network-icon { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; color: #d7ff4f; background: #2b3820; }.quickcopy-network-icon.network-solana { color: #b99cff; background: #332b43; }.quickcopy-network-mark { width: 15px; height: 15px; }.quickcopy-item-info { min-width: 0; }.quickcopy-item-info b, .quickcopy-item-info small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.quickcopy-item-info b { font-size: 11px; }.quickcopy-item-info small { margin-top: 4px; color: #858a7d; font-size: 9px; }.quickcopy-copy { color: #d7ff4f; font-size: 9px; font-weight: 700; letter-spacing: .7px; }.quickcopy-item.is-copied { border-color: #d7ff4f; }.quickcopy-empty { padding: 16px 8px; color: #858a7d; font-size: 10px; }
+@media (prefers-reduced-motion: reduce) { .quickcopy-trigger, .quickcopy-menu, .quickcopy-item, .quickcopy-chevron { transition: none; } }
+
+.quickcopy-shape-circle { border-radius: 999px; }.quickcopy-shape-rounded { border-radius: 8px; }
+
+/* Style: the trigger uses the selected accent as its actual visual token, with compact medium/large footprints. */
+.quickcopy-trigger.quickcopy-color-lime { --quickcopy-accent: #d7ff4f; }.quickcopy-trigger.quickcopy-color-sky { --quickcopy-accent: #85d8ff; }.quickcopy-trigger.quickcopy-color-coral { --quickcopy-accent: #ff9c72; }.quickcopy-trigger.quickcopy-color-violet { --quickcopy-accent: #c2a5ff; }
+.quickcopy-trigger.quickcopy-on-light { color: var(--quickcopy-accent); }.quickcopy-trigger.quickcopy-on-light:hover, .quickcopy-trigger.quickcopy-on-light.is-copied { color: var(--quickcopy-accent); border-color: var(--quickcopy-accent); }
+.quickcopy-trigger.quickcopy-on-dark { color: var(--quickcopy-accent); border-color: var(--quickcopy-accent); }.quickcopy-trigger.quickcopy-on-dark:hover, .quickcopy-trigger.quickcopy-on-dark.is-copied { box-shadow: 0 0 0 1px var(--quickcopy-accent), 0 4px 12px rgba(0,0,0,.25); }
+.quickcopy-size-medium { min-height: 30px; padding: 7px 9px; font-size: 9px; }.quickcopy-size-large { min-height: 32px; padding: 7px 10px; font-size: 9.5px; }
+
+
+
+.quickcopy-size-medium { min-height: 27px; padding: 6px 8px; font-size: 8.5px; gap: 6px; }.quickcopy-size-large { min-height: 36px; padding: 9px 13px; font-size: 10.5px; gap: 8px; }
+
+/* Style: Copy interactions should feel immediate in the Extension and X dropdown. */
+.copy { transition: transform .16s cubic-bezier(.23,1,.32,1), box-shadow .16s ease, background .16s ease; }.copy:hover { transform: translateY(-1px) scale(1.05); box-shadow: 0 5px 12px rgba(215,255,79,.2); }.copy.copied { animation: popup-copy-pop .38s cubic-bezier(.23,1,.32,1); }.quickcopy-copy { display: inline-flex; min-width: 38px; justify-content: center; padding: 5px 6px; border: 1px solid rgba(215,255,79,.35); background: rgba(215,255,79,.08); transition: color .16s ease, background .16s ease, transform .16s cubic-bezier(.23,1,.32,1), box-shadow .16s ease; }.quickcopy-item:hover .quickcopy-copy { background: #d7ff4f; color: #111210; border-color: #d7ff4f; transform: translateX(-2px) scale(1.04); box-shadow: 0 4px 10px rgba(215,255,79,.16); }.quickcopy-item.is-copied .quickcopy-copy { background: #d7ff4f; color: #111210; border-color: #d7ff4f; animation: popup-copy-pop .38s cubic-bezier(.23,1,.32,1); }
+@keyframes popup-copy-pop { 50% { transform: scale(1.11); } }
+
+
+
+.quickcopy-brand-mark{width:17px;height:17px;flex:0 0 17px;color:var(--quickcopy-accent,#c6ff00);border-radius:4px;overflow:hidden}.quickcopy-trigger.quickcopy-size-large .quickcopy-brand-mark{width:20px;height:20px;flex-basis:20px}
+
+.quickcopy-brand-mark{object-fit:cover;background:#c6ff00}
+
+.quickcopy-brand-mark{display:block;object-fit:unset;background:transparent}

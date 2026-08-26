@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "QuickCopy Wallet Control",
+  "version": "0.1.0",
+  "description": "Copy your public wallet addresses quickly while browsing X.",
+  "permissions": ["storage", "clipboardWrite"],
+  "host_permissions": ["https://x.com/*", "https://twitter.com/*"],
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_title": "QuickCopy Wallet Control",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "popup.html"
+}
