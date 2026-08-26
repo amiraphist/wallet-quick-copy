@@ -130,6 +130,15 @@
 
 .browser-download.is-separate:hover img { filter: brightness(0) saturate(100%) invert(76%) sepia(6%) saturate(328%) hue-rotate(43deg) brightness(87%) contrast(84%); }
 
+.browser-download b {
+  display: block;
+  margin-top: 5px;
+  color: #747a70;
+  font: 7px/1.35 'IBM Plex Mono';
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 .download-note {
   max-width: 520px;
   margin: 14px 0 0;

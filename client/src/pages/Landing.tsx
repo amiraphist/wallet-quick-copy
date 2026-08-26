@@ -17,11 +17,11 @@ function QuickCopyWordmark() {
 }
 
 const browsers = [
-  { name: "Firefox", family: "Firefox", icon: "/manus-storage/firefox_184ae9b8.svg", download: FIREFOX_PACKAGE, file: "quickcopy-firefox.zip" },
-  { name: "Chrome", family: "Chromium", icon: "/manus-storage/googlechrome_cc3a975d.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
-  { name: "Brave", family: "Chromium", icon: "/manus-storage/brave_3dbc3401.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
-  { name: "Opera", family: "Chromium", icon: "/manus-storage/opera_383802da.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
-  { name: "Arc", family: "Chromium", icon: "/manus-storage/arc_16409c5f.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip" },
+  { name: "Firefox", family: "Firefox", icon: "/manus-storage/firefox_184ae9b8.svg", download: FIREFOX_PACKAGE, file: "quickcopy-firefox.zip", install: "Download → about:debugging → select manifest" },
+  { name: "Chrome", family: "Chromium", icon: "/manus-storage/googlechrome_cc3a975d.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip", install: "Download → unpack → Extensions" },
+  { name: "Brave", family: "Chromium", icon: "/manus-storage/brave_3dbc3401.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip", install: "Download → unpack → Extensions" },
+  { name: "Opera", family: "Chromium", icon: "/manus-storage/opera_383802da.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip", install: "Download → unpack → Extensions" },
+  { name: "Arc", family: "Chromium", icon: "/manus-storage/arc_16409c5f.svg", download: CHROMIUM_PACKAGE, file: "quickcopy-chromium.zip", install: "Download → unpack → Extensions" },
 ];
 
 export default function Landing() {
@@ -60,7 +60,7 @@ export default function Landing() {
       </section>
 
       <section id="compatibility" className="compatibility-section compatibility-single">
-        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>Choose your browser and download its matching package. Firefox receives its own build; Chrome, Brave, Opera, and Arc share the Chromium build.</p><div className="compatibility-status"><span>INSTALL CONSOLE</span><strong><i /> 5 TARGETS · 2 PACKAGES</strong><code>QC/EXT-01</code></div><div className="browser-downloads" aria-label="QuickCopy browser package downloads">{browsers.map((browser) => <a key={browser.name} className="browser-download" href={browser.download} download={browser.file} title={`Download QuickCopy for ${browser.name}`}><img src={browser.icon} alt="" /><span><strong>{browser.name}</strong><small>{browser.family}</small></span><ArrowUpRight size={15} /></a>)}</div><p className="download-note">Both package manifests are built and checked; the Chromium package is smoke-loaded in Chromium in this workspace. Firefox needs signed distribution for persistent installation. Chromium browsers use the same package after “Load unpacked.”</p></div>
+        <div className="compatibility-copy"><div className="marketing-kicker"><span /> DESKTOP EXTENSION COVERAGE</div><h2>Built for the browsers<br />people actually use.</h2><p>Choose your browser and download its matching package. Firefox receives its own build; Chrome, Brave, Opera, and Arc share the Chromium build.</p><div className="compatibility-status"><span>INSTALL CONSOLE</span><strong><i /> 5 TARGETS · 2 PACKAGES</strong><code>QC/EXT-01</code></div><div className="browser-downloads" aria-label="QuickCopy browser package downloads">{browsers.map((browser) => <a key={browser.name} className="browser-download" href={browser.download} download={browser.file} title={`Download QuickCopy for ${browser.name}`}><img src={browser.icon} alt="" /><span><strong>{browser.name}</strong><small>{browser.family}</small><b>{browser.install}</b></span><ArrowUpRight size={15} /></a>)}</div><p className="download-note">Both package manifests are built and checked; the Chromium package is smoke-loaded in Chromium in this workspace. Firefox needs signed distribution for persistent installation. Chromium browsers use the same package after “Load unpacked.”</p></div>
       </section>
 
       <section id="safety" className="safety-section"><div className="safety-copy"><div className="marketing-kicker"><span /> LOCAL BY DESIGN</div><h2>Public data only.<br /><em>Control stays with you.</em></h2><p>Wallet labels, public addresses, ordering, and appearance preferences are stored locally. QuickCopy does not ask for seed phrases or private keys, and it does not send replies automatically.</p><Link href="/dashboard" className="primary-cta">Manage public addresses <ArrowUpRight size={17} /></Link></div><div className="safety-visual"><img src={LOCAL_IMAGE} alt="Abstract privacy and local control concept" /><div className="safety-badge"><LockKeyhole size={17} /><span><strong>LOCAL FIRST</strong><small>No seed phrases. No private keys.</small></span></div></div></section>

@@ -28,6 +28,10 @@ function SizeIcon({ size }: { size: QuickCopySettings["size"] }) {
   return <span className={`size-preview size-preview-${size}`} />;
 }
 
+function TriggerMark() {
+  return <svg viewBox="0 0 128 128" aria-hidden="true"><rect width="128" height="128" rx="28" fill="currentColor" /><rect x="36" y="36" width="40" height="40" rx="6" fill="none" stroke="#000" strokeWidth="7" /><rect x="52" y="52" width="40" height="40" rx="6" fill="#000" /><path d="M78 58 68 78h8l-6 14 18-24h-8l6-10Z" fill="currentColor" /></svg>;
+}
+
 function CopyButton({ wallet }: { wallet: Wallet }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -120,6 +124,7 @@ export default function Home() {
       <section id="settings" className="settings-section compact-settings"><div className="settings-intro"><div><div className="section-kicker">CONTROL PANEL <span>·</span> EXTENSION UI</div><h2>Button style</h2><p>Keep the action clear and consistent in every X theme.</p></div><div className="settings-saved"><Check size={14} /> Saved locally</div></div><div className="settings-layout settings-layout-single"><div className="settings-controls">
         <div className="shape-size-row"><div className="setting-group"><label>BUTTON SHAPE <span>Pick the silhouette used on X</span></label><div className="shape-row">{([{ id: "circle", label: "Circle" }, { id: "rounded", label: "Rounded" }] as const).map((shape) => <button key={shape.id} aria-label={shape.label} className={`shape-choice shape-${shape.id} ${settings.shape === shape.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, shape: shape.id }))}><ShapeIcon shape={shape.id} /></button>)}</div></div>
         <div className="setting-group"><label>BUTTON SIZE <span>Choose the footprint used on X</span></label><div className="size-row">{([{ id: "medium", label: "Medium" }, { id: "large", label: "Large" }] as const).map((size) => <button key={size.id} aria-label={size.label} className={`size-choice ${settings.size === size.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, size: size.id }))}><SizeIcon size={size.id} /></button>)}</div></div></div>
+        <div className={`live-trigger-preview preview-${settings.shape} preview-${settings.size} preview-${settings.color}`}><div className="live-preview-meta"><span>LIVE ON X WEB</span><strong>{settings.shape.toUpperCase()} · {settings.size.toUpperCase()}</strong></div><div className="live-x-surface"><div className="live-x-lines"><i /><i /><i /></div><div className="live-x-actions"><i /><i /><i /></div><div className="live-trigger"><TriggerMark />{settings.label && <span>Copy wallet</span>}</div></div><p>Updates instantly as you change the trigger controls.</p></div>
         <div className="setting-group"><label>ACCENT COLOR <span>Applies to the X trigger only</span></label><div className="color-row color-row-single">{[{ id: "lime", hex: "#D7FF4F", name: "Lime Signal" }, { id: "sky", hex: "#85D8FF", name: "Sky Relay" }, { id: "coral", hex: "#FF9C72", name: "Coral Pulse" }, { id: "violet", hex: "#C2A5FF", name: "Soft Violet" }].map((color) => <button key={color.id} className={`color-choice ${settings.color === color.id ? "chosen" : ""}`} onClick={() => setSettings((current) => ({ ...current, color: color.id }))}><span style={{ background: color.hex }} />{color.name}</button>)}</div></div>
         <div className="toggle-row"><div><strong>Show label</strong><span>Display “Copy wallet” beside the icon</span></div><button className={`toggle ${settings.label ? "on" : ""}`} onClick={() => setSettings((current) => ({ ...current, label: !current.label }))}><span /></button></div>
       </div></div></section>

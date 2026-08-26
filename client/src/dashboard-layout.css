@@ -24,6 +24,18 @@
 
 .shape-size-row .setting-group label span { line-height: 1.3; }
 
+.live-trigger-preview { margin: 0 0 20px; padding: 14px; border: 1px solid rgba(215,255,79,.28); background: #121410; }
+.live-preview-meta { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; color: #747a70; font: 8px 'IBM Plex Mono'; letter-spacing: .7px; }
+.live-preview-meta strong { color: var(--lime); font-weight: 500; }
+.live-x-surface { position: relative; min-height: 114px; overflow: hidden; border: 1px solid #343931; background: linear-gradient(135deg, #171a15, #0e100e); }
+.live-x-lines { position: absolute; top: 19px; left: 16px; display: grid; gap: 8px; width: 50%; }.live-x-lines i { display: block; height: 6px; background: #394036; }.live-x-lines i:nth-child(2) { width: 72%; }.live-x-lines i:nth-child(3) { width: 87%; }
+.live-x-actions { position: absolute; left: 16px; right: 16px; bottom: 15px; display: flex; gap: 16px; }.live-x-actions i { width: 8px; height: 8px; border: 1px solid #68705f; border-radius: 50%; }
+.live-trigger { position: absolute; right: 14px; bottom: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid currentColor; background: #141713; color: var(--preview-accent); font: 9px 'IBM Plex Mono'; transition: transform .16s cubic-bezier(.23,1,.32,1), color .16s ease; }
+.live-trigger svg { width: 25px; height: 25px; flex: 0 0 auto; }.live-trigger span { padding-right: 10px; white-space: nowrap; }
+.preview-circle .live-trigger { border-radius: 999px; }.preview-rounded .live-trigger { border-radius: 9px; }.preview-medium .live-trigger { min-height: 39px; padding: 5px; }.preview-large .live-trigger { min-height: 53px; padding: 8px; }.preview-large .live-trigger svg { width: 34px; height: 34px; }.preview-large .live-trigger span { font-size: 10px; }
+.preview-lime { --preview-accent: #d7ff4f; }.preview-sky { --preview-accent: #85d8ff; }.preview-coral { --preview-accent: #ff9c72; }.preview-violet { --preview-accent: #c2a5ff; }
+.live-trigger-preview p { margin: 10px 0 0; color: #777c72; font: 8px 'IBM Plex Mono'; }
+
 @media (max-width: 420px) {
   .shape-size-row { gap: 14px; }
 }

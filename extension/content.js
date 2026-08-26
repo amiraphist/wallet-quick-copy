@@ -9,6 +9,7 @@ const NETWORK_WORDS = { Ethereum: /\b(evm|ethereum|eth|base|polygon|arbitrum|opt
 const SCRIPT_REQUEST = /\u0648\u0627\u0644\u062a|\u0622\u062f\u0631\u0633|\u0627\u062f\u0631\u0633|\u0628\u0641\u0631\u0633|\u0628\u0632\u0627\u0631|\u0627\u0631\u0633\u0627\u0644/i;
 const fallbackWallets = [{ id: 'demo', name: 'Main Ethereum', network: 'Ethereum', address: '0x7A3f19d5B7D6a44f6aE3cE6aC7bF1b2a91cB' }];
 
+function reportQuickCopyError(stage, error) { console.warn(`[QuickCopy] ${stage}`, error); }
 function readStorage(key, fallback) { return new Promise((resolve) => chrome.storage.local.get({ [key]: fallback }, (result) => resolve(result[key]))); }
 function short(value) { return value.length > 18 ? `${value.slice(0, 8)}...${value.slice(-6)}` : value; }
 function groupFor(wallet) { return NETWORK_WORDS.Solana.test(`${wallet.name} ${wallet.network}`) ? 'Solana' : 'Ethereum'; }
@@ -36,12 +37,13 @@ async function addQuickCopy(post) {
   const menu = document.createElement('div'); menu.className = 'quickcopy-menu'; menu.setAttribute('role', 'menu');
   const heading = document.createElement('div'); heading.className = 'quickcopy-menu-heading'; heading.innerHTML = '<span>YOUR ADDRESSES</span><small>ONE CLICK COPY</small>'; menu.appendChild(heading);
   const list = document.createElement('div'); list.className = 'quickcopy-list'; menu.appendChild(list);
-  const copyWallet = async (wallet, item) => { await navigator.clipboard.writeText(wallet.address); const pasted = await pasteIntoReply(post, wallet.address); item.classList.add('is-copied'); item.querySelector('.quickcopy-copy').textContent = pasted ? 'PASTED' : 'COPIED'; trigger.classList.add('is-copied'); const label = trigger.querySelector('.quickcopy-text'); if (label) label.textContent = pasted ? 'PASTED' : 'COPIED'; menu.classList.remove('is-open'); setTimeout(() => { item.classList.remove('is-copied'); item.querySelector('.quickcopy-copy').textContent = 'COPY'; trigger.classList.remove('is-copied'); if (label) label.textContent = 'COPY WALLET'; }, 1400); };
+  const copyWallet = async (wallet, item) => { try { if (!navigator.clipboard?.writeText) throw new Error('Clipboard API is unavailable.'); await navigator.clipboard.writeText(wallet.address); const pasted = await pasteIntoReply(post, wallet.address); item.classList.add('is-copied'); item.querySelector('.quickcopy-copy').textContent = pasted ? 'PASTED' : 'COPIED'; trigger.classList.add('is-copied'); const label = trigger.querySelector('.quickcopy-text'); if (label) label.textContent = pasted ? 'PASTED' : 'COPIED'; menu.classList.remove('is-open'); setTimeout(() => { item.classList.remove('is-copied'); item.querySelector('.quickcopy-copy').textContent = 'COPY'; trigger.classList.remove('is-copied'); if (label) label.textContent = 'COPY WALLET'; }, 1400); } catch (error) { reportQuickCopyError('copy or reply insertion failed', error); item.querySelector('.quickcopy-copy').textContent = 'TRY AGAIN'; } };
   wallets.forEach((wallet) => { const item = document.createElement('button'); item.className = 'quickcopy-item'; item.setAttribute('role', 'menuitem'); item.innerHTML = `<span class="quickcopy-network-icon network-${groupFor(wallet).toLowerCase()}">${networkMark(groupFor(wallet))}</span><span class="quickcopy-item-info"><b></b><small></small></span><span class="quickcopy-copy">COPY</span>`; item.querySelector('b').textContent = wallet.name; item.querySelector('small').textContent = `${groupFor(wallet)} · ${short(wallet.address)}`; item.onclick = (event) => { event.stopPropagation(); copyWallet(wallet, item); }; list.appendChild(item); });
   trigger.onclick = (event) => { event.stopPropagation(); document.querySelectorAll('.quickcopy-menu.is-open').forEach((openMenu) => { if (openMenu !== menu) openMenu.classList.remove('is-open'); }); menu.classList.toggle('is-open'); };
   wrapper.append(trigger, menu); actions.appendChild(wrapper);
 }
-function scan() { document.querySelectorAll('article[data-testid="tweet"], article[role="article"]').forEach((post) => { if (!post.hasAttribute(INJECTED)) addQuickCopy(post); }); }
-const observer = new MutationObserver(scan); observer.observe(document.documentElement, { childList: true, subtree: true });
-chrome.storage.onChanged.addListener((changes, area) => { if (area !== 'local' || (!changes[SETTINGS_KEY] && !changes[QUICKCOPY_KEY])) return; document.querySelectorAll(`[${INJECTED}]`).forEach(clearInjected); scan(); });
-scan();
+function scan() { document.querySelectorAll('article[data-testid="tweet"], article[role="article"]').forEach((post) => { if (!post.hasAttribute(INJECTED)) addQuickCopy(post).catch((error) => { post.removeAttribute(INJECTED); reportQuickCopyError('post injection failed', error); }); }); }
+function safeScan() { try { scan(); } catch (error) { reportQuickCopyError('post scan failed', error); } }
+const observer = new MutationObserver(safeScan); observer.observe(document.documentElement, { childList: true, subtree: true });
+chrome.storage.onChanged.addListener((changes, area) => { if (area !== 'local' || (!changes[SETTINGS_KEY] && !changes[QUICKCOPY_KEY])) return; document.querySelectorAll(`[${INJECTED}]`).forEach(clearInjected); safeScan(); });
+safeScan();

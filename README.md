@@ -50,6 +50,12 @@ Both commands build from the same `extension/` source directory. The generated d
 | `pnpm extension:chromium` | `artifacts/quickcopy-chromium/` |
 | `pnpm extension:all` | Both outputs |
 
+## Store publication readiness
+
+QuickCopy now has a stable Firefox add-on ID, a Chromium-ready Manifest V3 build, and source-only listing material under `extension/store/`. The Firefox target is ready to submit to AMO after its package is produced and the listing details are reviewed. Chrome Web Store registration has **not** been started because Google requires a one-time developer registration fee; the Chromium package and listing material are prepared but no payment action is required or assumed.
+
+See [`extension/store/README.md`](extension/store/README.md) for the exact package, listing, privacy, reviewer-note, and store-submission checklist.
+
 ## Install for local testing
 
 ### Firefox
