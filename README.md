@@ -52,7 +52,7 @@ Both commands build from the same `extension/` source directory. The generated d
 
 ## Store publication readiness
 
-QuickCopy now has a stable Firefox add-on ID, a Chromium-ready Manifest V3 build, and source-only listing material under `extension/store/`. The Firefox target is ready to submit to AMO after its package is produced and the listing details are reviewed. Chrome Web Store registration has **not** been started because Google requires a one-time developer registration fee; the Chromium package and listing material are prepared but no payment action is required or assumed.
+QuickCopy has a stable Firefox add-on ID, a Chromium-ready Manifest V3 build, and source-only review material under `extension/store/`. The corrective AMO build is version `0.1.1`; its listing and reviewer documentation describe direct-request matching, public-address-only scope, local-only storage, permission rationale, independent status, and manual final posting. Chrome Web Store registration has **not** been started because Google requires a one-time developer registration fee; the Chromium package and listing material are prepared but no payment action is required or assumed.
 
 See [`extension/store/README.md`](extension/store/README.md) for the exact package, listing, privacy, reviewer-note, and store-submission checklist.
 
@@ -68,7 +68,7 @@ Open the browser’s extensions page, enable **Developer mode**, choose **Load u
 
 ## Safety
 
-QuickCopy only accepts public wallet addresses. Never enter seed phrases, private keys, recovery phrases, signing credentials, or anything that grants wallet access. The extension copies an address and can insert it into an open reply composer; it never submits a reply automatically.
+QuickCopy only accepts public Ethereum and Solana addresses. Never enter seed phrases, private keys, recovery phrases, signing credentials, passwords, or anything that grants wallet access. It stores configured values locally in the browser, is not affiliated with X/Twitter or wallet providers, and never submits a reply automatically.
 
 ## Repository policy
 

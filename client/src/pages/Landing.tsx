@@ -5,8 +5,8 @@ import { Link } from "wouter";
 const HERO_IMAGE = "/manus-storage/quickcopy-hero-terminal_66fe5c56.png";
 const FLOW_IMAGE = "/manus-storage/quickcopy-flow-detail_b1ce2744.png";
 const LOCAL_IMAGE = "/manus-storage/quickcopy-local-first_13f5439b.png";
-const FIREFOX_PACKAGE = "/manus-storage/quickcopy-firefox_0c0dcdef.zip";
-const CHROMIUM_PACKAGE = "/manus-storage/quickcopy-chromium_7e584803.zip";
+const FIREFOX_PACKAGE = "/manus-storage/quickcopy-firefox-0.1.1_eee682a4.zip";
+const CHROMIUM_PACKAGE = "/manus-storage/quickcopy-chromium-0.1.1_3fb99287.zip";
 
 function QuickCopyLogo() {
   return <img src="/manus-storage/quickcopy-nested-logo_da2ae5c5.png" alt="QuickCopy" />;
@@ -37,7 +37,7 @@ export default function Landing() {
         <div className="hero-copy">
           <div className="marketing-kicker"><span /> PUBLIC ADDRESS CONTROL</div>
           <h1>Copy once.<br /><em>Move with intent.</em></h1>
-          <p>Keep Ethereum and Solana public addresses ready for whitelist replies on X. Pick one, copy it, and place it in the reply composer—without sending anything for you.</p>
+          <p>Keep Ethereum and Solana public addresses ready for direct replies on X. Pick one, copy it, and place it in the reply composer—without sending anything for you.</p>
           <div className="hero-actions"><Link href="/dashboard" className="primary-cta">Open wallet dashboard <ArrowUpRight size={17} /></Link><a href="#workflow" className="text-cta">See the flow <ChevronDown size={16} /></a></div>
           <div className="hero-assurance"><span><Check size={14} /> Public addresses only</span><span><Check size={14} /> Never auto-posts</span></div>
           <div className="hero-telemetry" aria-label="QuickCopy operating status"><div><span>WALLET SLOTS</span><strong>10 READY</strong></div><div><span>NETWORKS</span><strong>ETH · SOL</strong></div><div><span>REPLY MODE</span><strong>REVIEW FIRST</strong></div></div>
